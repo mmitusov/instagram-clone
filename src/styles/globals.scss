@@ -5,7 +5,7 @@
 * {
   padding: 0;
   margin: 0;
-  border: 0;
+  // border: 0; otherwise tailwind border properties won't work
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
