@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+//Custom tailwind utility class
+@layer components {
+  .navButton {
+    @apply hidden h-6 md:flex cursor-pointer hover:scale-150 transition-all duration-150 ease-out
+  }
+}
+
 * {
   padding: 0;
   margin: 0;

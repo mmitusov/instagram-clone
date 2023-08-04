@@ -33,11 +33,11 @@ const Header = () => {
 
           <div className='flex justify-end items-center space-x-3'>
             <Bars3Icon className='h-8 w-8 md:hidden'/>
-            <HomeIcon className='h-8 w-8'/>
-            <PaperAirplaneIcon className='h-8 w-8'/>
-            <PlusCircleIcon className='h-8 w-8'/>
-            <UserGroupIcon className='h-8 w-8'/>
-            <HeartIcon className='h-8 w-8'/>
+            <HomeIcon className='h-8 w-8 navButton'/>
+            <PaperAirplaneIcon className='h-8 w-8 navButton'/>
+            <PlusCircleIcon className='h-8 w-8 navButton'/>
+            <UserGroupIcon className='h-8 w-8 navButton'/>
+            <HeartIcon className='h-8 w-8 navButton'/>
           </div>
       </div>
     </div>
