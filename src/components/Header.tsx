@@ -5,7 +5,7 @@ import { PaperAirplaneIcon, PlusCircleIcon, UserGroupIcon, HeartIcon } from '@he
 
 const Header = () => {
   return ( 
-    <div className='flex justify-center'>
+    <div className='flex justify-center shadow-sm border-b bg-white sticky top-0 z-100'>
       <div className='flex flex-1 max-w-6xl h-14 justify-between items-center '>
           <div className='relative hidden lg:flex w-24 h-full cursor-pointer'>
             <Image 
@@ -33,11 +33,19 @@ const Header = () => {
 
           <div className='flex justify-end items-center space-x-3'>
             <Bars3Icon className='h-8 w-8 md:hidden'/>
-            <HomeIcon className='h-8 w-8 navButton'/>
-            <PaperAirplaneIcon className='h-8 w-8 navButton'/>
-            <PlusCircleIcon className='h-8 w-8 navButton'/>
-            <UserGroupIcon className='h-8 w-8 navButton'/>
-            <HeartIcon className='h-8 w-8 navButton'/>
+            <HomeIcon className='navButton'/>
+            <div className='relative navButton'>
+              <PaperAirplaneIcon className='navButton -rotate-90'/>
+              <div className='absolute -top-2 -right-1 w-5 h-5 text-sm bg-red-500 rounded-full flex justify-center items-center animate-pulse text-white'>3</div>
+            </div>
+            <PlusCircleIcon className='navButton'/>
+            <UserGroupIcon className='navButton'/>
+            <HeartIcon className='navButton'/>
+            <img 
+              src='https://media.licdn.com/dms/image/C4D03AQEJKHnUCzaTzQ/profile-displayphoto-shrink_800_800/0/1627924003185?e=2147483647&v=beta&t=krHq5etfeQaUoc1rIBA2ejYoJP5T80_6R_Eq-bftz7Y'
+              alt='userPic'
+              className='h-8 rounded-full cursor-pointer'
+            />
           </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ export default function Home() {
         <title>Inta-Clone</title>
       </Head>
       <Header />
+      {/* Feed */}
     </div>
   )
 }
