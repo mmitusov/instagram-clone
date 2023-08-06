@@ -11,7 +11,7 @@ const Header = () => {
             <Image 
                 src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2880px-Instagram_logo.svg.png'
                 alt='logo'
-                objectFit='contain' 
+                style={{objectFit:"cover"}} 
                 fill
             /> 
           </div>
@@ -19,7 +19,7 @@ const Header = () => {
             <Image 
                   src='https://1000logos.net/wp-content/uploads/2017/02/insta-logo.png'
                   alt='logo'
-                  objectFit='contain' 
+                  style={{objectFit:"cover"}} 
                   fill
               />
           </div>
@@ -34,7 +34,7 @@ const Header = () => {
           <div className='flex justify-end items-center space-x-3'>
             <Bars3Icon className='h-8 w-8 md:hidden'/>
             <HomeIcon className='navButton'/>
-            <div className='relative navButton'>
+            <div className='relative hidden md:flex'>
               <PaperAirplaneIcon className='navButton -rotate-90'/>
               <div className='absolute -top-2 -right-1 w-5 h-5 text-sm bg-red-500 rounded-full flex justify-center items-center animate-pulse text-white'>3</div>
             </div>
