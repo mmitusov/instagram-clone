@@ -11,7 +11,7 @@ const Header = () => {
             <Image 
                 src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2880px-Instagram_logo.svg.png'
                 alt='logo'
-                style={{objectFit:"cover"}} 
+                style={{objectFit:"contain"}} 
                 fill
             /> 
           </div>
@@ -19,7 +19,7 @@ const Header = () => {
             <Image 
                   src='https://1000logos.net/wp-content/uploads/2017/02/insta-logo.png'
                   alt='logo'
-                  style={{objectFit:"cover"}} 
+                  style={{objectFit:"contain"}} 
                   fill
               />
           </div>

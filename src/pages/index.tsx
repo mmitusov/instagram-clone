@@ -1,3 +1,4 @@
+import Feed from '@/components/Feed'
 import Header from '@/components/Header'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
@@ -11,7 +12,7 @@ export default function Home() {
         <title>Inta-Clone</title>
       </Head>
       <Header />
-      {/* Feed */}
+      <Feed />
     </div>
   )
 }
