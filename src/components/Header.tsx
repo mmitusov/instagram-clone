@@ -5,7 +5,7 @@ import { PaperAirplaneIcon, PlusCircleIcon, UserGroupIcon, HeartIcon } from '@he
 
 const Header = () => {
   return ( 
-    <div className='flex justify-center shadow-sm border-b bg-white sticky top-0 z-100'>
+    <div className='flex justify-center shadow-sm border-b bg-white sticky top-0 z-50'>
       <div className='flex flex-1 max-w-6xl h-14 justify-between items-center '>
           <div className='relative hidden lg:flex w-24 h-full cursor-pointer'>
             <Image 

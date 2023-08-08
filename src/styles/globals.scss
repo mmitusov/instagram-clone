@@ -7,6 +7,10 @@
   .navButton {
     @apply hidden h-7 w-7 md:flex cursor-pointer hover:scale-150 transition-all duration-150 ease-out
   }
+
+  .postBtn {
+    @apply h-7 hover:scale-125 cursor-pointer transition-all duration-150 ease-out
+  }
 }
 
 //Basic styles

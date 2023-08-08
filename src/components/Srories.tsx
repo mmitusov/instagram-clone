@@ -29,12 +29,12 @@ const Srories = () => {
   }, [])
 
   return ( 
-    <div className='flex space-x-2 p-5 mt-5 bg-white border border-gray-200 rounded-lg overflow-x-scroll'>
+    <div className='flex space-x-2 p-5 mt-5 bg-white border border-gray-200 rounded-lg overflow-x-scroll scrollbar-thin scrollbar-thumb-black'>
       {
         suggestions.map(profile => (
           <div key={profile._id}>
-            <img src={profile.avatar} className='h-14 w-14 p-[1.5px] border-2 border-red-500 rounded-full object-contain cursor-pointer'/>
-            <p className='text-xs w-14 truncate'>
+            <img src={profile.avatar} className='h-14 w-14 p-[1.5px] border-2 border-red-500 rounded-full object-contain cursor-pointer hover:scale-110 transition transform duration-300 ease-out'/>
+            <p className='text-xs w-14 truncate text-center'>
               {profile.username}
             </p>
           </div>
