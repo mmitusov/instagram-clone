@@ -15,7 +15,7 @@ interface Suggestions {
 const Srories = () => {
   const [suggestions, setSuggestions] = useState<Suggestions[]>([])
   useEffect(() => { 
-    const suggestions = [...Array(20)].map((_, i) => ({ //Create empty erray of 20 elemets. For our project we don't need more fake profiles
+    const suggestions = [...Array(20)].map((_, i) => ({ //Create empty erray of 20 elemets. For our project we don't need more fake profiles then that
       _id: i,
       userId: faker.string.uuid(),
       username: faker.internet.userName(),
@@ -29,7 +29,7 @@ const Srories = () => {
   }, [])
 
   return ( 
-    <div className='flex space-x-2 p-5 mt-5 bg-white border border-gray-200 rounded-lg overflow-x-scroll scrollbar-thin scrollbar-thumb-black'>
+    <div className='flex space-x-2 p-5 bg-white border border-gray-200 rounded-lg overflow-x-scroll scrollbar-thin scrollbar-thumb-black'>
       {
         suggestions.map(profile => (
           <div key={profile._id}>

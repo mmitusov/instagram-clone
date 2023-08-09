@@ -6,8 +6,8 @@ const Post = ({id, username, userImg, img, caption}: any) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    //Header
     <div className='bg-white my-7 border rounded-lg'>
+      {/* Header */}
       <div className='flex items-center p-5'>
         <img src={userImg} alt='userPic' className='h-12 w-12 object-contain border rounded-full p-1 mr-3'/>
         <p className='flex-1 font-bold'>

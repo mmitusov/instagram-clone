@@ -9,7 +9,7 @@ export default function Home() {
   return ( //h-screen - делает наш елемент на всю высоту екрана
     <div className='flex flex-col bg-gray-50 h-screen overflow-y-scroll scrollbar-hide'> 
       <Head>
-        <title>Inta-Clone</title>
+        <title>Insta-Clone</title>
       </Head>
       <Header />
       <Feed />
