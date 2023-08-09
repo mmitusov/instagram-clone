@@ -5,6 +5,8 @@ npm install --save-dev tailwind-scrollbar
 npm install --save-dev tailwind-scrollbar-hide 
 npm install @heroicons/react
 npm install --save-dev @faker-js/faker
+npm install next-auth
+npm install firebase
 
 Спева почистим проект и оставим только _app.tsx, index.tsx и глобальные стили.
 
@@ -26,4 +28,27 @@ npm install --save-dev @faker-js/faker
 
 После этого можно приступить к верстке мини профиля юзера (MiniProfile) и рекомендациям (Suggestions), что будут находится правее от основной ленты.
 
-После завершения верстки основного дизайна, далее мы приступим к логике по аутентификации юзера.
+После завершения верстки основного дизайна, далее мы приступим к логике по аутентификации юзера. Для этого мы воспользуемся NextAuth.js и Firebase.
+
+NextAuth инициализируем в 'pages/api/auth/[...nextauth].ts' файле. В NextAuth в качестве провайдера мы воспользыемся Гуглом. Google's authentication API мы возмем из созданого нами проекта на Firebase.
+
+Firebase инициализируем в 'firebase-config.js' файле, и там же подтянем нужные нам SDK: getFirestore, getStorage. При инициализации Firebase соеденения в SSR среде (NextJS), нам дополнительно нужно будет воспользоваться getApps и getApp: `const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();`.
+
+Далее на вебстранице Firebase, зайдем в созданный проект и выберем метод аунтефикации через Google. После чего из Sign-in провайдера скопируем 'Web SDK configuration' и сохраним его в глобальные переменные, в `.env.local`. Web SDK configuration мы используем в '[...nextauth].ts' файле.
+
+LogIn/SignUp сраничка может быть двух видов. Стандартная страница от NextAuth "из коробки" и кастомная страница которую мы можем создать сами. В нашем случае мы создадим собственную кастомную страницу. Так как мы создаемя собственную страницу, впоследствии нам нужно будет указать к ней путь, чтобы NextAuth знал какая страница у нас отвечает за LogIn/SignUp.
+
+NextJS рекомендует чтобы мы создали нашу кастомную LogIn/SignUp страницу по следующему пути 'pages/auth/signin'.
+
+***What are providers in NextAuth and why should I use them?***
+In the context of the NextAuth library you're using for authentication in your Next.js app, the providers are configurations that define the authentication methods or strategies you want to make available for users to log in to your application.
+
+Each authentication provider represents a specific authentication service or platform (like Google, GitHub, Facebook, etc.), and it allows users to use their credentials from those platforms to authenticate with your application. These providers handle the authentication flow, token exchange, and other necessary steps behind the scenes.
+
+In your provided code snippet, you've imported the GoogleProvider from NextAuth and added it to the providers array. This configuration specifies that you want to enable Google-based authentication in your app. You've also provided the clientId and clientSecret which are required for communicating with Google's authentication API.
+
+For example, if you later decide to enable GitHub-based authentication in your app, you would import the GitHubProvider from NextAuth and add it to the providers array alongside the GoogleProvider. This way, your app will offer both Google and GitHub as authentication options.
+
+By using authentication providers, you can offer users a variety of ways to log in to your app without having to implement the intricate details of each authentication service yourself. NextAuth abstracts the complexities of authentication flows, token management, and user data retrieval, making it much easier to integrate various authentication methods into your application.
+
+In summary, the providers array in NextAuth's configuration is where you define which external authentication services your app will support, and by setting up these providers, you allow your users to log in using their existing accounts on platforms like Google, GitHub, and more.
