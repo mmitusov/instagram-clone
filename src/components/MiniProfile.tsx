@@ -1,6 +1,10 @@
 import React from 'react'
+import { useSession, signIn, signOut } from "next-auth/react"
+
 
 const MiniProfile = () => {
+  const { data: session } = useSession()
+  
   return (
     <div className='flex items-center justify-between'>
       <img 

@@ -14,7 +14,7 @@ export const authOptions = {
   //If we want to create our custom LogIn page we need to specify path to it
   pages: {
     signIn: '/auth/signin'
-  }
+  },
 
   // //If we want to use standat LogIn page provided by NextAuth
   // theme: {
@@ -22,7 +22,13 @@ export const authOptions = {
   //   brandColor: "#F13287", // Hex color code
   //   logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png", // Absolute URL to image
   //   buttonText: "" // Hex color code
-  // }
+  // },
+
+  callbacks: {
+    async redirect() {
+      return '/'
+    }
+  }
 }
 
 export default NextAuth(authOptions)
