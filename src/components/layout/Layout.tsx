@@ -9,12 +9,12 @@ const Layout = ({children}: Props) => {
     return (
         <>
             <Head>
-                <title>Music platform</title>
-                <meta name="description" content="Welcome to the best Music platform where you can not only listen to cool tracks but also add ones"/>
+                <title>Insta-Clone</title>
+                <meta name="description" content="Welcome to the Insta-Clone app"/>
                 <meta name="robots" content="index, follow" />
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <meta name="keywords" content={'Music, artists, tracks, listen'} />
-                <link rel="icon" href="/next.svg"/>
+                <meta name="keywords" content={'Photo, socila media'} />
+                {/* <link rel="icon" href="/next.svg"/> */}
             </Head>
 
             <Header />

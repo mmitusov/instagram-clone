@@ -24,10 +24,16 @@ export const authOptions = {
   //   buttonText: "" // Hex color code
   // },
 
+  // Where to redirect user after he LogedIn or LogedOut
   callbacks: {
     async redirect() {
       return '/'
-    }
+    },
+    async session({ session, token, user }: any) {
+      session.user.username = session.user.name.split(' ').join('').toLowerCase();
+      session.user.uid = token.sub; //Unique user ID created by Google from Firebase
+      return session
+    },
   }
 }
 
