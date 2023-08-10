@@ -17,7 +17,7 @@ const firebaseConfig = {
   appId: "1:999273955698:web:dcf62de54d8d8afb045deb"
 };
 
-// Initialize Firebase with SSR in mind
+// Initialize Firebase with SSR in mind. So it won't be initialized twice on the client side
 //!getApps().length - if app is not initialized (no length) -> initialize it
 //getApp() - otherwise get the currently initialized app
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();

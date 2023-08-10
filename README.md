@@ -50,15 +50,4 @@ NextJS рекомендует чтобы мы создали нашу касто
 
 После того как мы дописали 'signin.tsx', при нажатии "Войти с Гугл" у нас выбъет ошибку. Это нормально. Нам просто нужно будет настроить API ключи на Google Cloud для OAuth 2.0 Client IDs. Сперва нам нужно зайти в Google Cloud под тем же аккаунтом, под которым мы создавали проект на Firebase. После этого в списке проектов мы увидем имя нашего проекта из Firebase. Выбираем его. Переходим в раздел APIs & Services. А далее в Credentials. В поле OAuth 2.0 Client IDs выбираем редактирование ключа. И добавляем URL и URI по которому распологается наше приложение, чтобы гугл мог добавить эти ссылки как разрешенные для аунтефикации. URI мы можем взять из окна ошибки которая отображалась ранее (redirect_uri: ... ). Кликаем "Сохранить" и все должно работать.
 
-***What are providers in NextAuth and why should I use them?***
-In the context of the NextAuth library you're using for authentication in your Next.js app, the providers are configurations that define the authentication methods or strategies you want to make available for users to log in to your application.
-
-Each authentication provider represents a specific authentication service or platform (like Google, GitHub, Facebook, etc.), and it allows users to use their credentials from those platforms to authenticate with your application. These providers handle the authentication flow, token exchange, and other necessary steps behind the scenes.
-
-In your provided code snippet, you've imported the GoogleProvider from NextAuth and added it to the providers array. This configuration specifies that you want to enable Google-based authentication in your app. You've also provided the clientId and clientSecret which are required for communicating with Google's authentication API.
-
-For example, if you later decide to enable GitHub-based authentication in your app, you would import the GitHubProvider from NextAuth and add it to the providers array alongside the GoogleProvider. This way, your app will offer both Google and GitHub as authentication options.
-
-By using authentication providers, you can offer users a variety of ways to log in to your app without having to implement the intricate details of each authentication service yourself. NextAuth abstracts the complexities of authentication flows, token management, and user data retrieval, making it much easier to integrate various authentication methods into your application.
-
-In summary, the providers array in NextAuth's configuration is where you define which external authentication services your app will support, and by setting up these providers, you allow your users to log in using their existing accounts on platforms like Google, GitHub, and more.
+Теперь обернем самы родительский компонент "_app.tsx", в `<SessionProvider session={session}>`, чтобы мы могли считавать состояния сессии во всем нашем приложении. Теперь в любой части приложения мы имеем доступ к сессии: `const { data: session } = useSession()`. 'data: session' - renaming 'data' to 'session'. Also NextAuth goes with pre-build signIn, signOut functions - `import { useSession, signIn, signOut } from "next-auth/react"`.
