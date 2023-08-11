@@ -86,3 +86,20 @@ callbacks: {
 3) upload the image to 'firebase storage' with the post ID
 4) get a download URL from firebase storage and update the original post with URL of our image
 
+await new Promise((resolve) => {
+  setTimeout(() => {
+    console.log('Yooooooooo!'); // This will be called after 3 seconds
+    resolve();
+  }, 3000);
+});
+
+const addImageToPost = (e: React.ChangeEvent<HTMLInputElement>) => {
+  if (!e.target.files) return;
+  // setSelectegImg(URL.createObjectURL(e.target.files[0]))
+
+  const reader = new FileReader();
+  reader.readAsDataURL(e.target.files[0])
+  reader.onload = (readerEvent) => {
+    setSelectegImg(readerEvent?.target?.result)
+  }
+}
