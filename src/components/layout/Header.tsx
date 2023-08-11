@@ -4,11 +4,14 @@ import { MagnifyingGlassIcon, HomeIcon, Bars3Icon } from '@heroicons/react/24/so
 import { PaperAirplaneIcon, PlusCircleIcon, UserGroupIcon, HeartIcon } from '@heroicons/react/24/outline'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from 'next/router'
+import { useRecoilState } from 'recoil'
+import { modalState } from '@/store/modalAtom'
 
 const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useRecoilState(modalState);
   const { data: session } = useSession()
   let router= useRouter()
-
+  
   return ( 
     <div className='flex justify-center shadow-sm border-b bg-white sticky top-0 z-50'>
       <div className='flex flex-1 max-w-6xl h-14 justify-between items-center'>
@@ -52,7 +55,7 @@ const Header = () => {
                       <PaperAirplaneIcon className='navButton -rotate-90'/>
                       <div className='absolute -top-2 -right-1 w-5 h-5 text-sm bg-red-500 rounded-full flex justify-center items-center animate-pulse text-white'>3</div>
                     </div>
-                    <PlusCircleIcon className='navButton'/>
+                    <PlusCircleIcon className='navButton' onClick={() => setIsModalOpen(true)}/>
                     <UserGroupIcon className='navButton'/>
                     <HeartIcon className='navButton'/>
                     <img

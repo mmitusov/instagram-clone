@@ -7,6 +7,8 @@ npm install @heroicons/react
 npm install --save-dev @faker-js/faker
 npm install next-auth
 npm install firebase
+npm install recoil
+npm install @headlessui/react@latest
 
 .gitignore:
 .env.local
@@ -71,4 +73,8 @@ callbacks: {
 
 Повесим роутинг на кнопку Домой и Лого приложения в хедере.
 
-Далее реализуем кнопку загрузки фотографии юзера.
+Далее установим глобальный стейт под названием 'recoil'. Он поможет нам в дальнейшем в реализации кнопки по загрузки фотографий юзера. Отдельные слайсы/атомы стейта мы будем хранить в папке store. Чтобы пользоваться стейтом нужно воспользоваться хуком- `const [isModalOpen, setIsModalOpen] = useRecoilState(modalState);`. Чтобы не возникало ошибок, в .env нужно добаваить - RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false.
+
+Далее займемся модальным окном и создадим Modal.tsx.
+
+За дизайн окна будет отвечать @headlessui/react@latest.
