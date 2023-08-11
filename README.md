@@ -79,4 +79,10 @@ callbacks: {
 
 За дизайн окна будет отвечать @headlessui/react@latest. P.S. При нажатии на выбраную картинку сделаем так, чтобы она очищалась и мы могли выбрать другую.
 
-После верстки Модального окна, внутри модального компонента, также добавим функцию по выгрузке всей собраной инфы на Firestore DB. Чтобы впоследствии мы могли отобразить новый пост в новостной ленте.
+После верстки Модального окна, внутри модального компонента, также добавим функцию по выгрузке всей собраной инфы на Firestore DB. Чтобы впоследствии мы могли отобразить новый пост в новостной ленте. Сперва создадим DB в Firestore.
+ 
+1) create a post and add it to 'firestore store' 'posts' collection
+2) get the post ID for the newly created post
+3) upload the image to 'firebase storage' with the post ID
+4) get a download URL from firebase storage and update the original post with URL of our image
+

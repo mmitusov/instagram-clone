@@ -1,23 +1,53 @@
 import { modalState } from '@/store/modalAtom';
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { Transition, Dialog } from '@headlessui/react';
-import { CameraIcon } from '@heroicons/react/24/outline'
-
+import { CameraIcon } from '@heroicons/react/24/outline';
+import { db, storage } from '../../firebase-config';
+import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { useSession } from 'next-auth/react';
+import { ref, getDownloadURL, uploadString, uploadBytes } from 'firebase/storage';
 
 const Modal = () => {
+  const { data: session } = useSession()
   const [isModalOpen, setIsModalOpen] = useRecoilState(modalState);
-  const [selectegImg, setSelectegImg] = useState<string>('')
+  const [selectegImg, setSelectegImg] = useState<any>('')
+  const [loading, setLoading] = useState<boolean>(false)
   const filePickerRef = useRef(null);
   const captionRef = useRef(null);
-  
-  const uploadPost = () => {
-    // console.log('sasdasdas')
-  }
+   
+  const uploadPost = async () => {
+    if (loading) return;
+    setLoading(true)
 
+    // create a post
+    const docRef = await addDoc(collection(db, 'posts'), {
+      username: session?.user?.username,
+      profileImg: session?.user?.image, 
+      caption: captionRef?.current?.value,
+      timestamp: serverTimestamp()
+    }) 
+    // get the post ID
+    console.log('New document added. ID: ', docRef.id) 
+    const imageRef = ref(storage, `/posts/${docRef.id}/image`);
+    // upload the image to firebase storage
+    const snapshot = await uploadString(imageRef, selectegImg, 'data_url')
+    // get a download URL
+    const downloadURL = await getDownloadURL(imageRef);
+    await updateDoc(doc(db, 'posts', docRef.id), {postImg: downloadURL});
+
+    setIsModalOpen(false)
+    setLoading(false)
+    setSelectegImg('')
+  }
+  
   const addImageToPost = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
-    setSelectegImg(URL.createObjectURL(e.target.files[0]))
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0])
+    reader.onload = (readerEvent) => {
+      setSelectegImg(readerEvent?.target?.result)
+    }
   }
 
   return (
@@ -122,7 +152,7 @@ const Modal = () => {
                       disabled:cursor-not-allowed hover:disabled:bg-gray-300"
                     '
                   >
-                    Upload Post
+                    {loading ? 'Uploading...' : 'Upload Post'}
                   </button>
                 </div>
               </div>
