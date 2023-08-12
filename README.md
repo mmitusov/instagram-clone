@@ -1,5 +1,5 @@
 tailwindCSS
-npm i sass
+npm install sass
 npm install -D @tailwindcss/forms
 npm install --save-dev tailwind-scrollbar
 npm install --save-dev tailwind-scrollbar-hide 
@@ -9,6 +9,7 @@ npm install next-auth
 npm install firebase
 npm install recoil
 npm install @headlessui/react@latest
+npm install react-moment - for time stamps
 
 .gitignore:
 .env.local
@@ -93,7 +94,11 @@ useEffect(() => {
 }, [db])
 ```
 
-Posts.tsx
+Далее приступим к кнопкам "Лайк" и "Комментарии" в 'Posts.tsx'.
+
+Сперва сделаем так, чтобы незарегестрированный юзер не видел секцию с коментариями и лайками.
+
+Приступим к комментариям. И начнем с генерации коллекции коментариев на firebase. После этого в режиме реального времени будем их отрендривать. При ренедере постов дополнительно воспользуемся библиотекой "react-moment". Это нам позволит отображать как довно был загружен тот или иной пост.
 
 
 

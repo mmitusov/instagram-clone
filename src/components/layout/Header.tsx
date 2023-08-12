@@ -10,7 +10,7 @@ import { modalState } from '@/store/modalAtom'
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useRecoilState(modalState);
   const { data: session } = useSession()
-  let router= useRouter()
+  let router = useRouter()
   
   return ( 
     <div className='flex justify-center shadow-sm border-b bg-white sticky top-0 z-50'>

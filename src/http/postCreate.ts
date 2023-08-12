@@ -4,6 +4,7 @@ import { ref, getDownloadURL, uploadString, uploadBytes } from 'firebase/storage
 
 export const postCreate = async ({session, captionRef, selectegImg}: any) => {
   // create a post
+  //db, 'posts' - path
   const docRef = await addDoc(collection(db, 'posts'), {
     username: session?.user?.username,
     profileImg: session?.user?.image, 
