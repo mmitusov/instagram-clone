@@ -6,18 +6,42 @@ import { commentCreate } from '@/http/commentCreate';
 import { db } from '../../firebase-config';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Moment from 'react-moment';
+import { removeLike, setLike } from '@/http/userLikes';
+
 
 const Post = ({id, username, userImg, postImg, caption}: any) => {
   const [comment, setComment] = useState<any>('');
   const [commentsList, setCommentsList] = useState<any>([]);
+  const [likes, setLikes] = useState<any>([]);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
   const [expanded, setExpanded] = useState(false);
   const { data: session } = useSession()
 
   useEffect(() => {
     return onSnapshot(query(collection(db, 'posts', id, 'comments'), orderBy('timestamp', 'desc')), 
       snapshot => {setCommentsList(snapshot.docs)})
-  }, [db])
-  
+  }, [db]) //id
+
+  useEffect(() => {
+    return onSnapshot(query(collection(db, 'posts', id, 'likes')), 
+      snapshot => {setLikes(snapshot.docs)})
+  }, [db]) //id
+
+  useEffect(() => {
+    (async() => {
+      const checkLiked = await likes.findIndex((like: any) => like.id === session?.user?.uid) !== -1
+      setIsLiked(checkLiked)
+    })()
+  }, [likes]);
+
+  const likePost = async (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    e.preventDefault() 
+    if (isLiked) {
+      await removeLike({id, session});
+    } else {
+      await setLike({id, session});
+    }
+  }
 
   const sendComment = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
@@ -50,7 +74,12 @@ const Post = ({id, username, userImg, postImg, caption}: any) => {
       {session &&
         <div className='flex justify-between px-4 pt-4'>
           <div className='flex space-x-4'>
-            <HeartIcon className='postBtn'/>
+            {isLiked
+              ?
+                <HeartIconFilled className='postBtn text-red-500' onClick={likePost}/>
+              :
+                <HeartIcon className='postBtn' onClick={likePost}/>
+            }
             <ChatBubbleOvalLeftEllipsisIcon className='postBtn'/>
             <PaperAirplaneIcon className='postBtn'/>
           </div>
@@ -60,6 +89,9 @@ const Post = ({id, username, userImg, postImg, caption}: any) => {
 
       {/* Caption */}
       <div className={`p-5 ${expanded ? '' : 'truncate'}`}>
+        {likes.length > 0 &&
+          <p className='font-bold mb-1'>{likes.length} likes</p>
+        }
         <span className='font-bold mr-1'>{username} </span>
         {expanded 
           ?
@@ -79,7 +111,7 @@ const Post = ({id, username, userImg, postImg, caption}: any) => {
               <img src={comment.data().profileImg} alt='userPic' className='h-7 rounded-full'/>
               <span className='font-bold'>{comment.data().username}</span>
               <p className='text-sm flex-1'>{comment.data().comment}</p>
-              <Moment fromNow interval={60000} className='pr-5 text-xs'>
+              <Moment fromNow interval={300000} className='pr-5 text-xs'>
                 {comment.data().timestamp?.toDate()}
               </Moment>
             </div>

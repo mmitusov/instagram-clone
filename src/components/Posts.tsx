@@ -18,7 +18,6 @@ const Posts = () => {
     return onSnapshot(query(collection(db, 'posts'), orderBy('timestamp', 'desc')), 
       snapshot => {setPosts(snapshot.docs)})
   }, [db])
-  console.log(posts && posts[0])
   
   return (
     <div>
