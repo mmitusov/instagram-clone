@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { EllipsisHorizontalIcon, HeartIcon as HeartIconFilled } from '@heroicons/react/24/solid'
 import { HeartIcon, ChatBubbleOvalLeftEllipsisIcon, PaperAirplaneIcon, BookmarkIcon, FaceSmileIcon } from '@heroicons/react/24/outline'
 
-const Post = ({id, username, userImg, img, caption}: any) => {
+const Post = ({id, username, userImg, postImg, caption}: any) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -17,7 +17,7 @@ const Post = ({id, username, userImg, img, caption}: any) => {
       </div>
 
       {/* Main img */}
-      <img src={img} alt='' className='object-cover w-full'/>
+      <img src={postImg} alt='' className='object-cover w-full'/>
 
       {/* Buttons */}
       <div className='flex justify-between px-4 pt-4'>

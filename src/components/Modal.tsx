@@ -3,10 +3,8 @@ import React, { Fragment, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { Transition, Dialog } from '@headlessui/react';
 import { CameraIcon } from '@heroicons/react/24/outline';
-import { db, storage } from '../../firebase-config';
-import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
-import { ref, getDownloadURL, uploadString, uploadBytes } from 'firebase/storage';
+import { postCreate } from '@/http/postCreate';
 
 const Modal = () => {
   const { data: session } = useSession()
@@ -20,21 +18,7 @@ const Modal = () => {
     if (loading) return;
     setLoading(true)
 
-    // create a post
-    const docRef = await addDoc(collection(db, 'posts'), {
-      username: session?.user?.username,
-      profileImg: session?.user?.image, 
-      caption: captionRef?.current?.value,
-      timestamp: serverTimestamp()
-    }) 
-    // get the post ID
-    console.log('New document added. ID: ', docRef.id) 
-    const imageRef = ref(storage, `/posts/${docRef.id}/image`);
-    // upload the image to firebase storage
-    const snapshot = await uploadString(imageRef, selectegImg, 'data_url')
-    // get a download URL
-    const downloadURL = await getDownloadURL(imageRef);
-    await updateDoc(doc(db, 'posts', docRef.id), {postImg: downloadURL});
+    await postCreate({ session, captionRef, selectegImg })
 
     setIsModalOpen(false)
     setLoading(false)
