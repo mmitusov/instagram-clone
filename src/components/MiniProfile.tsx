@@ -10,7 +10,7 @@ const MiniProfile = () => {
       <img 
         src={session?.user?.image}
         alt='userPic'
-        className='h-16 w-16 border rounded-full p-[2px] cursor-pointer'
+        className='h-16 w-16 border rounded-full p-[2px]'
       />
 
       <div className='mx-4'>

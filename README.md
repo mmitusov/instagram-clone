@@ -11,9 +11,7 @@ npm install recoil
 npm install @headlessui/react@latest
 npm install react-moment - for time stamps
 
-.gitignore:
-.env.local
-firebase-config.js
+!!! NEXTAUTH_URL inside .env and URL spesified on the Google Cloud should always be the same as your currecnt domain, e.g.: http://localhost:3000. Otherwise app NextAuth will not run.
 
 Спева почистим проект и оставим только _app.tsx, index.tsx и глобальные стили.
 

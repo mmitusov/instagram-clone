@@ -51,17 +51,17 @@ const Header = () => {
               session
                 ?
                   <>
-                    <div className='relative hidden md:flex'>
+                    <div className='relative hidden md:flex' onClick={() => router.push('/messages')}>
                       <PaperAirplaneIcon className='navButton -rotate-90'/>
                       <div className='absolute -top-2 -right-1 w-5 h-5 text-sm bg-red-500 rounded-full flex justify-center items-center animate-pulse text-white'>3</div>
                     </div>
                     <PlusCircleIcon className='navButton' onClick={() => setIsModalOpen(true)}/>
-                    <UserGroupIcon className='navButton'/>
-                    <HeartIcon className='navButton'/>
+                    <UserGroupIcon className='navButton' onClick={() => router.push('/friends')}/>
+                    <HeartIcon className='navButton' onClick={() => router.push('/likes')}/>
                     <img
                       src={session?.user?.image}
                       alt='userPic'
-                      className='h-8 w-8 rounded-full cursor-pointer'
+                      className='h-8 w-8 rounded-full'
                     />
                   </>
                 :

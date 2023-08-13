@@ -14,6 +14,7 @@ interface Posts {
 
 const Posts = () => {
   const [posts, setPosts] = useState<Posts[] | DocumentData[]>([])
+  
   useEffect(() => {
     return onSnapshot(query(collection(db, 'posts'), orderBy('timestamp', 'desc')), 
       snapshot => {setPosts(snapshot.docs)})

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { EllipsisHorizontalIcon, HeartIcon as HeartIconFilled } from '@heroicons/react/24/solid'
 import { HeartIcon, ChatBubbleOvalLeftEllipsisIcon, PaperAirplaneIcon, BookmarkIcon, FaceSmileIcon } from '@heroicons/react/24/outline'
 import { useSession } from 'next-auth/react';
-import { commentCreate } from '@/http/commentCreate';
 import { db } from '../../firebase-config';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import Moment from 'react-moment';
 import { removeLike, setLike } from '@/http/userLikes';
+import { commentCreate } from '@/http/commentCreate';
+import { postDelete } from '@/http/postDelete';
+import Moment from 'react-moment';
 
 
 const Post = ({id, username, userImg, postImg, caption}: any) => {
@@ -15,6 +16,7 @@ const Post = ({id, username, userImg, postImg, caption}: any) => {
   const [likes, setLikes] = useState<any>([]);
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [expanded, setExpanded] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const { data: session } = useSession()
 
   useEffect(() => {
@@ -59,12 +61,20 @@ const Post = ({id, username, userImg, postImg, caption}: any) => {
   return ( 
     <div className='bg-white my-7 border rounded-lg'>
       {/* Header */}
-      <div className='flex items-center p-5'>
+      <div className='relative flex items-center p-5'>
         <img src={userImg} alt='userPic' className='h-12 w-12 object-contain border rounded-full p-1 mr-3'/>
         <p className='flex-1 font-bold'>
           {username}
         </p>
-        <EllipsisHorizontalIcon className='h-5'/>
+        <EllipsisHorizontalIcon className='h-5 cursor-pointer' onClick={() => setShowDropdown(!showDropdown)}/>
+        {showDropdown &&
+          <button
+            onClick={() => postDelete(id)}
+            className='absolute top-[25%] right-[50px] border rounded-lg p-2 cursor-pointer hover:bg-red-500 hover:text-white'
+          >
+            Delete post
+          </button>
+        }
       </div>
 
       {/* Main img */}
