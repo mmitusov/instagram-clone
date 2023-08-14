@@ -98,24 +98,8 @@ useEffect(() => {
 
 Приступим к Комментариям. И начнем с генерации коллекции коментариев на firebase. После этого в режиме реального времени будем их отрендривать. При ренедере постов дополнительно воспользуемся библиотекой "react-moment". Это нам позволит отображать как довно был загружен тот или иной пост.
 
-Приступим к Лайкам.
+Приступим к Лайкам. При нажатии на лайк мы будем создавать новый документ в БД с ID юзера как основной ключ, а если мы захотим убрать лайк, то мы просто удалим этот документ. И так как он хранится под ID юзера, нам всегда легко узнать иммется ли лайк в БД или нет.
 
+Также добавим возможность удалять пост при клики на троеточие вверху него.
 
-
-await new Promise((resolve) => {
-  setTimeout(() => {
-    console.log('Yooooooooo!'); // This will be called after 3 seconds
-    resolve();
-  }, 3000);
-});
-
-const addImageToPost = (e: React.ChangeEvent<HTMLInputElement>) => {
-  if (!e.target.files) return;
-  // setSelectegImg(URL.createObjectURL(e.target.files[0]))
-
-  const reader = new FileReader();
-  reader.readAsDataURL(e.target.files[0])
-  reader.onload = (readerEvent) => {
-    setSelectegImg(readerEvent?.target?.result)
-  }
-}
+Все, на этом основной функционал дописан!
