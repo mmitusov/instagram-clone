@@ -53,8 +53,8 @@ const Post = ({id, username, userImg, postImg, caption}: any) => {
     await commentCreate({
       id, 
       comment: commentCopy,
-      username: session?.user?.username,
-      profileImg: session?.user?.image,
+      username: session?.user?.username!,
+      profileImg: session?.user?.image!,
     })
   }
 
