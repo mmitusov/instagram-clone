@@ -2,7 +2,7 @@ import Feed from '@/components/Feed'
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next';
 import Modal from '@/components/Modal';
- 
+
 export const metadata: Metadata = {
   title: 'Insta-Clone 1.0',
   description: 'Welcome to Insta-Clone',
