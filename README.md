@@ -106,3 +106,4 @@ useEffect(() => {
 
 next-auth.d.ts
 tsconfig.json
+https://stackoverflow.com/questions/69602694/how-to-update-the-type-of-session-in-session-callback-in-next-auth-when-using-ty

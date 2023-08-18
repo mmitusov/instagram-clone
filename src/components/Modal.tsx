@@ -11,7 +11,7 @@ const Modal = () => {
   const [isModalOpen, setIsModalOpen] = useRecoilState(modalState);
   const [selectegImg, setSelectegImg] = useState<any>('')
   const [loading, setLoading] = useState<boolean>(false)
-  const filePickerRef = useRef(null);
+  const filePickerRef = useRef<HTMLInputElement | null>(null);
   const captionRef = useRef(null);
    
   const uploadPost = async () => {
