@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Post from './Post'
-import { DocumentData, collection, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { DocumentData, collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../firebase-config'
 // import useSWR from 'swr'
  
@@ -17,7 +17,22 @@ const Posts = () => {
   const [posts, setPosts] = useState<Posts[] | DocumentData[]>([])
   useEffect(() => {
     return onSnapshot(query(collection(db, 'posts'), orderBy('timestamp', 'desc')), 
-      snapshot => {setPosts(snapshot.docs)})
+      (snapshot) => {
+        //Extract all of the data befor saving
+        const postsData: Posts[] = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            username: data.username,
+            profileImg: data.profileImg,
+            postImg: data.postImg,
+            caption: data.caption,
+            timestamp: data.timestamp,
+          }
+        });
+        setPosts(postsData);
+      }
+    )
   }, [db])
 
   // const { data: posts } = useSWR(db, async () => {
@@ -33,10 +48,10 @@ const Posts = () => {
           <Post 
             key={post.id}
             id={post.id} //It's our unique post ID
-            username={post.data().username}
-            userImg={post.data().profileImg}
-            postImg={post.data().postImg}
-            caption={post.data().caption}
+            username={post.username}
+            userImg={post.profileImg}
+            postImg={post.postImg}
+            caption={post.caption}
           />
         ))
       }
