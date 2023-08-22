@@ -18,7 +18,7 @@ const Posts = () => {
   useEffect(() => {
     return onSnapshot(query(collection(db, 'posts'), orderBy('timestamp', 'desc')), 
       (snapshot) => {
-        //Extract all of the data befor saving
+        //Extract all of the data from snapshot before saving
         const postsData: Posts[] = snapshot.docs.map((doc) => {
           const data = doc.data();
           return {
