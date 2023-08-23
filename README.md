@@ -104,6 +104,5 @@ useEffect(() => {
 
 Все, на этом основной функционал дописан!
 
-next-auth.d.ts
-tsconfig.json
-https://stackoverflow.com/questions/69602694/how-to-update-the-type-of-session-in-session-callback-in-next-auth-when-using-ty
+P.S. ***Типизация кастомной session из [...nextauth].ts***
+Когда мы мутируем базовую сессмю в nextauth, нам нужно [указать типизацию новых хранимых данных](https://stackoverflow.com/questions/69602694/how-to-update-the-type-of-session-in-session-callback-in-next-auth-when-using-ty). Для этого создадим новый файл "next-auth.d.ts" и в нем укажем тип новых данных. Далее, если "next-auth.d.ts" находится не в корне проекта, то нужно не забыть указать к нему путь в tsconfig.json ("include": [...]). Таким образом мы глобально подтянем новые созданные типы.
